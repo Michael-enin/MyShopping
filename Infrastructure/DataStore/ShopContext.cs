@@ -8,6 +8,6 @@ namespace Infrastructure.DataStore
         public ShopContext(DbContextOptions<ShopContext> options) : base(options)
         {
         }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product>? Products { get; set; }
     }
 }
