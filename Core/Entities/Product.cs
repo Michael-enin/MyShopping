@@ -7,10 +7,10 @@ namespace Core.Entities
         public string? Name { get; set; }
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
-        public string pictureUrl { get; set; } = string.Empty;
+        public string PictureUrl { get; set; } = string.Empty;
         public ProductType ProductType { get; set; }
-        public int productTypeId { get; set; }
+        public int ProductTypeId { get; set; }
         public ProductBrand ProductBrand { get; set; }
-        public int productBrandId { get; set; }
+        public int ProductBrandId { get; set; }
     }
 }

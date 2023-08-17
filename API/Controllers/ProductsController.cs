@@ -1,9 +1,9 @@
+using System.Collections.Generic;
 using Infrastructure.DataStore;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
-
 namespace API.Controllers
 {
     [ApiController]
@@ -30,10 +30,15 @@ namespace API.Controllers
         {
             return Ok(await _pRepository.GetProductByIdAsync(id));
         }
-        [HttpPut("{id}")]
-        public string UpdateProduct(int id)
+        [HttpPut("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
-            return "product";
+            return Ok(await _pRepository.GetProductBrandsAsync());
+        }
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+        {
+            return Ok(await _pRepository.GetProductTypesAsync());
         }
     }
 
