@@ -11,10 +11,12 @@ namespace Infrastructure.DataStore.EntityConfguration
             builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(200);
             builder.Property(x => x.Price).HasColumnType("decimal(18,2)");
-            builder.HasOne(x => x.ProductBrand).WithMany()
-                          .HasForeignKey(x => x.ProductBrandId);
-            builder.HasOne(x => x.ProductType).WithMany()
-            .HasForeignKey(x => x.ProductTypeId);
+            builder.HasOne(x => x.ProductBrand)
+                   .WithMany()
+                   .HasForeignKey(x => x.ProductBrandId);
+            builder.HasOne(x => x.ProductType)
+                   .WithMany()
+                   .HasForeignKey(x => x.ProductTypeId);
 
         }
     }

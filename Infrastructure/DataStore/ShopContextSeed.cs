@@ -10,16 +10,7 @@ namespace Infrastructure.DataStore
         {
             try
             {
-                if (!context.ProductTypes.Any())
-                {
-                    var typesData = File.ReadAllText("../Infrastructure/DataStore/SeedData/types.json");
-                    var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
-                    foreach (var type in types)
-                    {
-                        context.ProductTypes.Add(type);
-                    }
-                    await context.SaveChangesAsync();
-                }
+
 
                 if (!context.Products.Any())
                 {
@@ -28,6 +19,16 @@ namespace Infrastructure.DataStore
                     foreach (var product in products)
                     {
                         context.Products.Add(product);
+                    }
+                    await context.SaveChangesAsync();
+                }
+                if (!context.ProductTypes.Any())
+                {
+                    var typesData = File.ReadAllText("../Infrastructure/DataStore/SeedData/types.json");
+                    var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
+                    foreach (var type in types)
+                    {
+                        context.ProductTypes.Add(type);
                     }
                     await context.SaveChangesAsync();
                 }

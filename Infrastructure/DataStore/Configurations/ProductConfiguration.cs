@@ -23,8 +23,6 @@ namespace Infrastructure.DataStore.Configurations
                    .WithMany()
                    .HasForeignKey(x => x.ProductTypeId);
 
-
-
         }
 
     }

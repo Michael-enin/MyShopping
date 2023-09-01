@@ -12,33 +12,50 @@ namespace API.Controllers
     {
         private readonly ShopContext _shopContext;
         private readonly IProductRepository _pRepository;
-        public ProductsController(IProductRepository pRepository)
+        private readonly IGenericRepository<Product> _productsRepo;
+        private readonly IGenericRepository<ProductBrand> _prodBrandsRepo;
+        private readonly IGenericRepository<ProductType> _prodTypesRepo;
+
+        public ProductsController(IProductRepository pRepository,
+         IGenericRepository<Product> prod,
+         IGenericRepository<ProductBrand> prodBrand,
+         IGenericRepository<ProductType> prodType)
         {
             _pRepository = pRepository;
-
+            this._productsRepo = prod;
+            this._prodBrandsRepo = prodBrand;
+            this._prodTypesRepo = prodType;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var prod = await _pRepository.GetProductsListAsync();
-            return Ok(prod);
+            var products = await _productsRepo.GetAllAsync();
+            // var prod = await _pRepository.GetProductsListAsync();
+            return Ok(products);
         }
         [HttpGet("{id}")]
 
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return Ok(await _pRepository.GetProductByIdAsync(id));
+            var products = await _productsRepo.GetByIdAsync(id);
+            return Ok(products);
+            //return Ok(await _pRepository.GetProductByIdAsync(id));
         }
-        [HttpPut("brands")]
+        [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
-            return Ok(await _pRepository.GetProductBrandsAsync());
+
+            //return Ok(await _pRepository.GetProductBrandsAsync());
+            var brands = await _prodBrandsRepo.GetAllAsync();
+            return Ok(brands);
         }
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
-            return Ok(await _pRepository.GetProductTypesAsync());
+            // return Ok(await _pRepository.GetProductTypesAsync());
+            var types = await _prodTypesRepo.GetAllAsync();
+            return Ok(types);
         }
     }
 
